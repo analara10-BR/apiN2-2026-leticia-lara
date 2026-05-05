@@ -1,10 +1,11 @@
 {
   "name": "apin2-2026-leticia-lara",
   "version": "1.0.0",
-  "description": "",
+  "description": "Api etapa N2 versão 1",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node src/server.js",
+    "dev": "nodemon src/server.js"
   },
   "repository": {
     "type": "git",
@@ -13,7 +14,7 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "type": "commonjs",
+  "type": "module",
   "bugs": {
     "url": "https://github.com/analara10-BR/apiN2-2026-leticia-lara/issues"
   },
