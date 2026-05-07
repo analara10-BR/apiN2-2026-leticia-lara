@@ -8,13 +8,48 @@ const router = Router();
 
 const controller = new ApiController();
 
-router.get("/roupas",
-(req, res) => controller.getRoupas(req, res));
 
-router.get("/roupas/:id",
-verifyParamId,
-(req, res, next) =>
-controller.getRoupaByParamId(req, res, next)
+// LISTAR TODAS AS ROUPAS
+router.get(
+    "/roupas",
+    (req, res) =>
+        controller.getRoupas(req, res)
 );
 
-export default router;
+
+// BUSCAR ROUPA POR ID
+router.get(
+    "/roupas/:id",
+    verifyParamId,
+    (req, res, next) =>
+        controller.getRoupaByParamId(req, res, next)
+);
+
+
+// CADASTRAR NOVA ROUPA
+router.post(
+    "/roupas",
+    (req, res) =>
+        controller.createRoupa(req, res)
+);
+
+
+// ATUALIZAR ROUPA
+router.put(
+    "/roupas/:id",
+    verifyParamId,
+    (req, res, next) =>
+        controller.updateRoupa(req, res, next)
+);
+
+
+// DELETAR ROUPA
+router.delete(
+    "/roupas/:id",
+    verifyParamId,
+    (req, res, next) =>
+        controller.deleteRoupa(req, res, next)
+);
+
+
+export { router };
