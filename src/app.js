@@ -1,22 +1,41 @@
+import express from "express";
+
 import { router as apiRouter } from "./routes/api.routes.js";
+
 import { mdebug } from "./middlewares/debug.middleware.js";
-import { notFound, errorHandler } from "./middlewares/errors.middleware.js";
+
+import {
+    notFound,
+    errorHandler
+} from "./middlewares/errors.middleware.js";
+
 import { mcors } from "./middlewares/mcors.middleware.js";
 
 const app = express();
 
-// Registra Middlewares na Aplicação
-app.use(mcors); // CORS (Cross-Origin Resource Sharing)
-app.use(express.json()); // Middleware global para lidar com JSON
-app.use(mdebug);
+
+// REGISTRA MIDDLEWARES NA APLICAÇÃO
+
+app.use(mcors); // CORS
+
+app.use(express.json()); // Middleware para JSON
+
+app.use(mdebug); // Middleware de debug
+
+
+// ROTAS DA API
 
 app.use("/api", apiRouter);
 
-// Após todas as rotas, há o tratamento de erro para uma rota inexistente
-// Se nenhuma das rotas funcionar, será enviado um erro 404 ao cliente.
+
+// TRATAMENTO DE ROTAS INEXISTENTES
+
 app.use(notFound);
 
-// Middleware de erro
+
+// MIDDLEWARE DE ERRO
+
 app.use(errorHandler);
+
 
 export default app;
