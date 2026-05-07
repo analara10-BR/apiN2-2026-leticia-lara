@@ -1,103 +1,55 @@
-export default class ApiController {
+import { Router } from "express";
 
-    constructor() {}
+import ApiController from "../controllers/api.controller.js";
 
-    roupas = [
+import verifyParamId from "../middlewares/verify.id.middleware.js";
 
-        {
-            id: 1,
-            nome: "Jaqueta Jeans",
-            tamanho: "M",
-            marca: "Levis",
-            preco: 80,
-            categoria: "Casaco",
-            disponivel: true
-        },
+const router = Router();
 
-        {
-            id: 2,
-            nome: "Vestido Vintage",
-            tamanho: "P",
-            marca: "Zara",
-            preco: 65,
-            categoria: "Vestido",
-            disponivel: true
-        },
+const controller = new ApiController();
 
-        {
-            id: 3,
-            nome: "Camisa Oversized",
-            tamanho: "G",
-            marca: "Nike",
-            preco: 90,
-            categoria: "Camisa",
-            disponivel: true
-        },
 
-        {
-            id: 4,
-            nome: "Calça Cargo",
-            tamanho: "42",
-            marca: "Adidas",
-            preco: 110,
-            categoria: "Calça",
-            disponivel: true
-        },
+// LISTAR TODAS AS ROUPAS
+router.get(
+    "/roupas",
+    (req, res) =>
+        controller.getRoupas(req, res)
+);
 
-        {
-            id: 5,
-            nome: "Moletom Preto",
-            tamanho: "M",
-            marca: "Puma",
-            preco: 95,
-            categoria: "Moletom",
-            disponivel: false
-        }
 
-    ];
+// BUSCAR ROUPA POR ID
+router.get(
+    "/roupas/:id",
+    verifyParamId,
+    (req, res, next) =>
+        controller.getRoupaByParamId(req, res, next)
+);
 
-    // LISTAR ROUPAS
-    async getRoupas(req, res) {
 
-        try {
+// CADASTRAR NOVA ROUPA
+router.post(
+    "/roupas",
+    (req, res) =>
+        controller.createRoupa(req, res)
+);
 
-            res.json(this.roupas);
 
-        } catch (error) {
+// ATUALIZAR ROUPA
+router.put(
+    "/roupas/:id",
+    verifyParamId,
+    (req, res, next) =>
+        controller.updateRoupa(req, res, next)
+);
 
-            return res.status(500).json({
-                error: "Erro ao exibir roupas!"
-            });
 
-        }
+// DELETAR ROUPA
+router.delete(
+    "/roupas/:id",
+    verifyParamId,
+    (req, res, next) =>
+        controller.deleteRoupa(req, res, next)
+);
 
-    }
 
-    // BUSCAR ROUPA POR ID
-    async getRoupaByParamId(req, res, next) {
-
-        try {
-
-            const id = Number(req.params.id);
-
-            const roupa = this.roupas.find(
-                roupa => roupa.id === id
-            );
-
-            if (!roupa) {
-
-                throw new Error("Roupa não encontrada!");
-
-            }
-
-            res.json(roupa);
-
-        } catch (error) {
-
-            next(error);
-
-        }
-
-    }
-
-}
+export { router };
