@@ -1,22 +1,69 @@
-import {router as apiRouter} from "./routes/api.routes.js";
-import {mdebug} from "./middlewares/debug.middleware.js";
-import {notFound, errorHandler} from "./middlewares/errors.middleware.js";
-import {mcors} from "./middlewares/mcors.middleware.js";
+### Configurações Globais
+@baseUrl = http://localhost:3000
+@contentType = application/json
 
-const app = express();
+###
 
-// Registra Middlewares na Aplicação
-app.use (mcors); // CORS (Cross-Origin Resource Sharing)
-app.use (express.json()); // Middleware global para lidar com JSON 
-app.use(mdebug);
+### LISTAR TODAS AS ROUPAS
+GET {{baseUrl}}/api/roupas
+Accept: {{contentType}}
 
-app.use("/api", apiRouter);
+###
 
-// Após todas as rotas, há o tratamento de erro para uma rota inexistente 
-// Se nenhuma das rotas funcionar, será enviado um erro 404 ao cliente. 
-app.use(notFound);
+### BUSCAR ROUPA PELO ID 1
+GET {{baseUrl}}/api/roupas/1
+Accept: {{contentType}}
 
-// Middleware de erro 
-app.use(errorHandler);
+###
 
-export default app;
+### BUSCAR ROUPA PELO ID 5
+GET {{baseUrl}}/api/roupas/5
+Accept: {{contentType}}
+
+###
+
+### TESTAR ID INVÁLIDO
+GET {{baseUrl}}/api/roupas/ABC
+Accept: {{contentType}}
+
+###
+
+### TESTAR ROUPA NÃO EXISTENTE
+GET {{baseUrl}}/api/roupas/99
+Accept: {{contentType}}
+
+###
+
+### CADASTRAR NOVA ROUPA
+POST {{baseUrl}}/api/roupas
+Content-Type: {{contentType}}
+
+{
+    "nome": "Vestido Floral",
+    "tamanho": "M",
+    "marca": "Marisa",
+    "preco": 70,
+    "categoria": "Vestido"
+}
+
+###
+
+### ATUALIZAR ROUPA
+PUT {{baseUrl}}/api/roupas/2
+Content-Type: {{contentType}}
+
+{
+    "preco": 150
+}
+
+###
+
+### DELETAR ROUPA
+DELETE {{baseUrl}}/api/roupas/3
+Accept: {{contentType}}
+
+###
+
+### TESTAR ROTA INEXISTENTE
+GET {{baseUrl}}/api/teste
+Accept: {{contentType}}
