@@ -1,25 +1,49 @@
 export default class ApiController {
-  constructor() {}
 
-  async getInfo(req, res) {
-    try {
-      res.json({ message: "Api Web em Node e Express." });
-    } catch (error) {
-      return res.status(500).json({ error: "Erro ao ao exibir dados da api!" });
+    async getRoupas(req, res) {
+        try {
+
+            res.json([
+                {
+                    id: 1,
+                    nome: "Jaqueta Jeans",
+                    tamanho: "M",
+                    preco: 80
+                },
+
+                {
+                    id: 2,
+                    nome: "Vestido Vintage",
+                    tamanho: "P",
+                    preco: 65
+                }
+            ]);
+
+        } catch (error) {
+
+            return res.status(500).json({
+                error: "Erro ao listar roupas"
+            });
+
+        }
     }
-  }
 
-  async getInfoByParamId(req, res, next) {
-    try {
-      const id = Number(req.params.id);
+    async getRoupaByParamId(req, res, next) {
 
-      if (id !== 42) {
-        throw new Error("Resposta Incorreta!");
-      }
+        try {
 
-      res.json({ message: `ID: ${id}` });
-    } catch (error) {
-      next(error);
+            const id = Number(req.params.id);
+
+            if (id !== 7) {
+                throw new Error("Roupa não encontrada");
+            }
+
+            res.json({
+                mensagem: `Roupa encontrada! ID: ${id}`
+            });
+
+        } catch (error) {
+            next(error);
+        }
     }
-  }
 }
