@@ -1,3 +1,5 @@
+
+
 ### Configurações Globais
 @baseUrl = http://localhost:3000
 @contentType = application/json
