@@ -226,6 +226,4 @@ export default class ApiController {
     }
 
 }
-    }
 
-}
