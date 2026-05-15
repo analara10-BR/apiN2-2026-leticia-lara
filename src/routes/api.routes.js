@@ -1,4 +1,5 @@
 
+
 import { Router } from "express";
 
 import ApiController from "../controllers/api.controller.js";
@@ -63,6 +64,5 @@ router.get("/home", (req, res) => {
     res.json(dados);
 
 });
-
 
 export { router };
