@@ -1,4 +1,10 @@
+
+
 import express from "express";
+
+import path from "node:path";
+
+import { fileURLToPath } from "url";
 
 import { router as apiRouter } from "./routes/api.routes.js";
 
@@ -11,30 +17,53 @@ import {
 
 import { mcors } from "./middlewares/mcors.middleware.js";
 
+
+const __filename = fileURLToPath(import.meta.url);
+
+const __dirname = path.dirname(__filename);
+
+
 const app = express();
 
 
-// REGISTRA MIDDLEWARES NA APLICAÇÃO
+// CONFIGURAÇÕES DO EJS
+app.set("view engine", "ejs");
 
-app.use(mcors); // CORS
+app.set(
+    "views",
+    path.join(__dirname, "views")
+);
 
-app.use(express.json()); // Middleware para JSON
 
-app.use(mdebug); // Middleware de debug
+// MIDDLEWARES
+app.use(express.static(
+    path.join(__dirname, "../public")
+));
+
+app.use(express.json());
+
+app.use(mcors);
+
+app.use(mdebug);
 
 
-// ROTAS DA API
+// ROTA VIEW EJS
+app.get("/home", (req, res) => {
 
+    res.render("home");
+
+});
+
+
+// ROTAS API
 app.use("/api", apiRouter);
 
 
 // TRATAMENTO DE ROTAS INEXISTENTES
-
 app.use(notFound);
 
 
 // MIDDLEWARE DE ERRO
-
 app.use(errorHandler);
 
 
