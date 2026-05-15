@@ -1,0 +1,36 @@
+
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Loja</title>
+</head>
+
+<body>
+
+    <h1 id="titulo">Carregando...</h1>
+
+    <script>
+
+        async function carregarDadosSite() {
+
+            const res =
+                await fetch('/api/home');
+
+            const dados =
+                await res.json();
+
+            const h1 =
+                document.querySelector("#titulo");
+
+            h1.textContent = dados.titulo;
+        }
+
+        window.onload = carregarDadosSite;
+
+    </script>
+
+</body>
+
+</html>
