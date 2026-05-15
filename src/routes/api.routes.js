@@ -1,3 +1,4 @@
+
 import { Router } from "express";
 
 import ApiController from "../controllers/api.controller.js";
@@ -50,6 +51,18 @@ router.delete(
     (req, res, next) =>
         controller.deleteRoupa(req, res, next)
 );
+
+
+// NOVA ROTA HOME
+router.get("/home", (req, res) => {
+
+    const dados = {
+        titulo: "Loja Virtual"
+    };
+
+    res.json(dados);
+
+});
 
 
 export { router };
