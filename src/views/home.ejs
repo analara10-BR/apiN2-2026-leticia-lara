@@ -1,35 +1,22 @@
-
 <!DOCTYPE html>
 <html lang="pt-br">
 
 <head>
-    <meta charset="UTF-8">
-    <title>Loja</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Home</title>
+
+    <!-- CSS da pasta public/styles -->
+    <link rel="stylesheet" href="/styles/site.css" />
 </head>
 
 <body>
 
     <h1 id="titulo">Carregando...</h1>
 
-    <script>
-
-        async function carregarDadosSite() {
-
-            const res =
-                await fetch('/api/home');
-
-            const dados =
-                await res.json();
-
-            const h1 =
-                document.querySelector("#titulo");
-
-            h1.textContent = dados.titulo;
-        }
-
-        window.onload = carregarDadosSite;
-
-    </script>
+    <!-- JS da pasta public/scripts -->
+    <script src="/scripts/site.js"></script>
 
 </body>
 
