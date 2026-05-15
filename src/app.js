@@ -1,53 +1,43 @@
-
-
 import express from "express";
 import path from "node:path";
+import { fileURLToPath } from "node:url";
 
 import { router as apiRouter } from "./routes/api.routes.js";
 
-import { mdebug } from "./middlewares/debug.middleware.js";
-
-import {
-    notFound,
-    errorHandler
-} from "./middlewares/errors.middleware.js";
-
-import { mcors } from "./middlewares/mcors.middleware.js";
-
 const app = express();
 
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
-// CONFIGURAÇÕES DO EJS
+
+// EJS
 app.set("view engine", "ejs");
-app.set("views", path.join(import.meta.dirname, "views"));
+
+app.set(
+    "views",
+    path.join(__dirname, "views")
+);
 
 
-// REGISTRA MIDDLEWARES NA APLICAÇÃO
-
-app.use(mcors); // CORS
-
-app.use(express.json()); // Middleware para JSON
-
-app.use(express.static(path.join(import.meta.dirname, "public")));
-
-app.use(mdebug); // Middleware de debug
+// PUBLIC
+app.use(
+    express.static(
+        path.join(__dirname, "../public")
+    )
+);
 
 
-// ROTAS DA API
+// JSON
+app.use(express.json());
+
+
+// API
 app.use("/api", apiRouter);
 
 
-// ROTA DA VIEW
+// HOME
 app.get("/home", (req, res) => {
     res.render("home");
 });
-
-
-// TRATAMENTO DE ROTAS INEXISTENTES
-app.use(notFound);
-
-
-// MIDDLEWARE DE ERRO
-app.use(errorHandler);
 
 export default app;
