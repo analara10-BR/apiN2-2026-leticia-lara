@@ -82,4 +82,8 @@ app.get("/products", (req, res) => {
 
 });
 
+app.get("/products/:id", (req, res) => {
+    res.render("product-details");
+});
+
 export default app;
