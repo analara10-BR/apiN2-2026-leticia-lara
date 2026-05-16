@@ -34,6 +34,17 @@ app.use(express.json());
 // API
 app.use("/api", apiRouter);
 
+app.get("/home", (req, res) => {
+    res.render("home");
+});
+
+app.get("/about", (req, res) => {
+    res.render("about");
+});
+
+app.get("/contact", (req, res) => {
+    res.render("contact");
+});
 
 app.get("/products", (req, res) => {
 
@@ -41,7 +52,7 @@ app.get("/products", (req, res) => {
 
         {
             id: 1,
-            nome: "Mini saia",
+            nome: "Saia",
             disponivel: true
         },
 
@@ -59,7 +70,7 @@ app.get("/products", (req, res) => {
 
         {
             id: 4,
-            nome: "cropped",
+            nome: "Cropped",
             disponivel: false
         }
 
