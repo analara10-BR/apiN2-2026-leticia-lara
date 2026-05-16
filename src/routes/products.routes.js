@@ -6,9 +6,12 @@ const router = Router();
 const controller = new ProductsController();
 
 router.get("/products", (req, res, next) => {
-
     controller.getProducts(req, res, next);
-
+    
+router.get("/products/:id", (req, res, next) =>
+    controller.getProductById(req, res, next)
+);
+    
 });
 
 export { router };
