@@ -3,34 +3,16 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Produtos</title>
 </head>
 
 <body>
 
-    <h1>Lista de Produtos</h1>
+    <h1>Produtos</h1>
 
-    <div class="container">
+    <div id="container-produtos"></div>
 
-        <% listaProdutos.forEach(produto => { %>
-
-            <div class="card">
-
-                <h3>
-                    <%= produto.nome %>
-                </h3>
-
-                <p>
-                    Status:
-                    <%= produto.disponivel ? "Em estoque" : "Indisponível" %>
-                </p>
-
-            </div>
-
-        <% }) %>
-
-    </div>
+    <script src="/scripts/products.js"></script>
 
 </body>
 
