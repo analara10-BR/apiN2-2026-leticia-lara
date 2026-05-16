@@ -8,7 +8,26 @@
 
 <body>
 
-    <h1>Produtos</h1>
+    <div class="container">
+
+        <% listaProdutos.forEach(produto => { %>
+
+            <div class="card">
+
+                <h3>
+                    <%= produto.nome %>
+                </h3>
+
+                <p>
+                    Status:
+                    <%= produto.disponivel ? "Em estoque" : "Indisponível" %>
+                </p>
+
+            </div>
+
+        <% }) %>
+
+    </div>
 
 </body>
 
