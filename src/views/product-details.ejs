@@ -1,0 +1,30 @@
+async function carregarDetalhesProduto() {
+
+    const path = window.location.pathname;
+
+    const partes = path.split("/");
+
+    const id = partes[partes.length - 1];
+
+    const response = await fetch(`/api/products/${id}`);
+
+    const produto = await response.json();
+
+    const container = document.getElementById("container-produto");
+
+    container.innerHTML = `
+        <div class="card">
+
+            <h3>${produto.nome}</h3>
+
+            <p>
+                ${produto.disponivel ? "Disponível" : "Indisponível"}
+            </p>
+
+            <p>ID: ${produto.id}</p>
+
+        </div>
+    `;
+}
+
+window.onload = carregarDetalhesProduto;
