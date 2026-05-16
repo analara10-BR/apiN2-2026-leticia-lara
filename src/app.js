@@ -35,9 +35,40 @@ app.use(express.json());
 app.use("/api", apiRouter);
 
 
-// HOME
-app.get("/home", (req, res) => {
-    res.render("home");
+app.get("/products", (req, res) => {
+
+    const products = [
+
+        {
+            id: 1,
+            nome: "Mini saia",
+            disponivel: true
+        },
+
+        {
+            id: 2,
+            nome: "Calça cargo",
+            disponivel: true
+        },
+
+        {
+            id: 3,
+            nome: "Vestido",
+            disponivel: false
+        },
+
+        {
+            id: 4,
+            nome: "cropped",
+            disponivel: false
+        }
+
+    ];
+
+    res.render("products", {
+        listaProdutos: products
+    });
+
 });
 
 export default app;
