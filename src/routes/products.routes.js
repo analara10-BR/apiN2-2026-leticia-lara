@@ -10,8 +10,6 @@ router.get("/products", (req, res, next) => {
     
 router.get("/products/:id", (req, res, next) =>
   controller.getProductById(req, res, next),
-);
-    
-});
+)
 
 export { router };
